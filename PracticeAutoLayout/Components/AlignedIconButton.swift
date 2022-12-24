@@ -8,6 +8,8 @@
 import UIKit
 
 class AlignedIconButton: UIButton {
+    var padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -18,7 +20,8 @@ class AlignedIconButton: UIButton {
                      bgColor: UIColor = .systemBlue,
                      foregroundColor: UIColor = .white,
                      radius: CGFloat = 8,
-                     icon: UIImage? = nil
+                     icon: UIImage? = nil,
+                     padding: UIEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
     ) {
         self.init(type: .system)
         self.setTitle(title, for: .normal)
@@ -26,8 +29,17 @@ class AlignedIconButton: UIButton {
         self.tintColor = foregroundColor
         self.layer.cornerRadius = radius
         self.setImage(icon, for: .normal)
+        self.padding = padding
     }
     override func layoutSubviews() {
         super.layoutSubviews()
+        let imageWidth = imageView?.frame.width ?? 0
+        contentHorizontalAlignment = .left
+        let availableSpace = bounds.inset(by: contentEdgeInsets)
+        let availableWidth = availableSpace.width - imageEdgeInsets.right - (imageView?.frame.width ?? 0) - (titleLabel?.frame.width ?? 0)
+        let leftPadding = (availableWidth / 2) - (imageWidth / 2)
+        titleEdgeInsets = UIEdgeInsets(top: 0, left: leftPadding, bottom: 0, right: 0)
+        //전체적인 padding을 넣기 위해서는
+        contentEdgeInsets = padding
     }
 }

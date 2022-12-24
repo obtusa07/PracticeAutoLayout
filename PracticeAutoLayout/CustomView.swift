@@ -20,6 +20,16 @@ class CustomView: UIView {
     }
     fileprivate func setupUI() {
         self.backgroundColor = .systemYellow
+        let icon = UIImage(systemName: "square.and.arrow.up.fill")
+        //        let dummyButtons = Array(0...20).map { index in
+        //            AlignedIconButton(title: "\(index) 버튼")
+        //        }
+        let button = AlignedIconButton(title: "qqjqj", icon: icon)
+        self.addSubview(button)
+        button.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(100)
+            $0.horizontalEdges.equalToSuperview().inset(10)
+        }
     }
 }
 

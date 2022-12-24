@@ -52,15 +52,11 @@ class ViewController: UIViewController {
         }
         let icon = UIImage(systemName: "square.and.arrow.up.fill")
         let dummyButtons = Array(0...20).map { index in
-            AlignedIconButton(title: "\(index) 버튼")
+            AlignedIconButton(title: "\(index) 버튼", icon: icon)
         }
-//        let myButton = UIButton(configuration: .filled()).then {
-//            $0.setTitle("123", for: .normal)
-//        }
         dummyButtons.forEach {
             butttonStackView.addArrangedSubview($0)
         }
-        //butttonStackView.addArrangedSubview(dummyButtons)
     }
 
 }
