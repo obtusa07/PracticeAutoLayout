@@ -13,6 +13,12 @@
 		7B9188982957134F00BA345B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B9188962957134F00BA345B /* Main.storyboard */; };
 		7B91889A2957135000BA345B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B9188992957135000BA345B /* Assets.xcassets */; };
 		7B91889D2957135000BA345B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B91889B2957135000BA345B /* LaunchScreen.storyboard */; };
+		7B9188A62957136B00BA345B /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9188A52957136B00BA345B /* UIViewController+Extension.swift */; };
+		7B9188A82957142F00BA345B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9188A72957142F00BA345B /* UIView+Extension.swift */; };
+		7B9188AA2957170100BA345B /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9188A92957170100BA345B /* CustomView.swift */; };
+		7B9188AD295719DB00BA345B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7B9188AC295719DB00BA345B /* SnapKit */; };
+		7B9188B0295719F200BA345B /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 7B9188AF295719F200BA345B /* Then */; };
+		7B9188B32957222000BA345B /* AlignedIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9188B22957222000BA345B /* AlignedIconButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +30,10 @@
 		7B9188992957135000BA345B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B91889C2957135000BA345B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B91889E2957135000BA345B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B9188A52957136B00BA345B /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		7B9188A72957142F00BA345B /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		7B9188A92957170100BA345B /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
+		7B9188B22957222000BA345B /* AlignedIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlignedIconButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B9188AD295719DB00BA345B /* SnapKit in Frameworks */,
+				7B9188B0295719F200BA345B /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +68,8 @@
 		7B91888F2957134F00BA345B /* PracticeAutoLayout */ = {
 			isa = PBXGroup;
 			children = (
+				7B9188B12957220100BA345B /* Components */,
+				7B9188A42957135600BA345B /* Extension */,
 				7B9188902957134F00BA345B /* AppDelegate.swift */,
 				7B9188922957134F00BA345B /* SceneDelegate.swift */,
 				7B9188942957134F00BA345B /* ViewController.swift */,
@@ -63,8 +77,26 @@
 				7B9188992957135000BA345B /* Assets.xcassets */,
 				7B91889B2957135000BA345B /* LaunchScreen.storyboard */,
 				7B91889E2957135000BA345B /* Info.plist */,
+				7B9188A92957170100BA345B /* CustomView.swift */,
 			);
 			path = PracticeAutoLayout;
+			sourceTree = "<group>";
+		};
+		7B9188A42957135600BA345B /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				7B9188A52957136B00BA345B /* UIViewController+Extension.swift */,
+				7B9188A72957142F00BA345B /* UIView+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		7B9188B12957220100BA345B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				7B9188B22957222000BA345B /* AlignedIconButton.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +115,10 @@
 			dependencies = (
 			);
 			name = PracticeAutoLayout;
+			packageProductDependencies = (
+				7B9188AC295719DB00BA345B /* SnapKit */,
+				7B9188AF295719F200BA345B /* Then */,
+			);
 			productName = PracticeAutoLayout;
 			productReference = 7B91888D2957134F00BA345B /* PracticeAutoLayout.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +147,10 @@
 				Base,
 			);
 			mainGroup = 7B9188842957134F00BA345B;
+			packageReferences = (
+				7B9188AB295719DB00BA345B /* XCRemoteSwiftPackageReference "SnapKit" */,
+				7B9188AE295719F200BA345B /* XCRemoteSwiftPackageReference "Then" */,
+			);
 			productRefGroup = 7B91888E2957134F00BA345B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,9 +178,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B9188A62957136B00BA345B /* UIViewController+Extension.swift in Sources */,
 				7B9188952957134F00BA345B /* ViewController.swift in Sources */,
 				7B9188912957134F00BA345B /* AppDelegate.swift in Sources */,
+				7B9188AA2957170100BA345B /* CustomView.swift in Sources */,
+				7B9188A82957142F00BA345B /* UIView+Extension.swift in Sources */,
 				7B9188932957134F00BA345B /* SceneDelegate.swift in Sources */,
+				7B9188B32957222000BA345B /* AlignedIconButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +402,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7B9188AB295719DB00BA345B /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+		7B9188AE295719F200BA345B /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7B9188AC295719DB00BA345B /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B9188AB295719DB00BA345B /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		7B9188AF295719F200BA345B /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B9188AE295719F200BA345B /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7B9188852957134F00BA345B /* Project object */;
 }
