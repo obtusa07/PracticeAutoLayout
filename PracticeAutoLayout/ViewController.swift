@@ -8,8 +8,13 @@
 import UIKit
 import SnapKit
 import Then
+import Combine
 
 class ViewController: UIViewController {
+    @Published var loadingState: LoadingButton.LoadingState = .normal
+    // 뷰 컨트롤러가 메모리에서 해제될 때 컴바인도 같이 해제되어야 한다.
+    
+    var subscriptions = Set<AnyCancellable>()
     lazy var myScrollView: UIScrollView = UIScrollView().then {
         // 스크롤바 바운싱 설정
         $0.isUserInteractionEnabled = true
@@ -57,6 +62,14 @@ class ViewController: UIViewController {
         dummyButtons.forEach {
             butttonStackView.addArrangedSubview($0)
             $0.addTarget(self, action: #selector(onButtonClicked(_:)), for: .touchUpInside)
+            // published 된 요소를 사용하고자 하면 앞에 $사인을 붙인다.
+            // on은 붙이고자 하는 객체. 이 경우에는 dummyButtons들이다.
+            // to는 on에서 붙은 객체의 속성들이다.
+            // combine에서는 메모리 관리를 해줘야 한다.
+            // 콤바인 퍼플리셔 데이터 상태 <-> 버튼의 loadingState
+            self.$loadingState
+                .assign(to: \.loadingState, on: $0)
+                .store(in: &subscriptions)
         }
     }
 
@@ -68,7 +81,23 @@ extension ViewController {
     ///  버튼 클릭시 (해당 화면은 옵션 커맨드 쉬프트로 만들수 있다.)
     /// - Parameter sender: 클릭한 버튼
     @objc fileprivate func onButtonClicked(_ sender: LoadingButton) {
-        sender.loadingState = sender.loadingState == .loading ? .normal : .loading
+        
+        // 만약 이 버튼이 로그인 버튼이라면 한번 눌리면 못 누르게 해야함
+        // 아래 코드로 눌렸다는 것이 감지되면 return으로 함수를 끝내서 다시 눌리는걸 예방할 수 있음. 혹은 로딩 버튼에서 isUserInteractionEnabled를 비활성화 하는 방법으로도 막아놨음
+        if self.loadingState == .loading {
+            return
+        }
+        self.loadingState = .loading
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+            self.loadingState = .normal
+        })
+        // combine의 publisher 데이터 상태를 변경
+//        if self.loadingState == .normal {
+//            self.loadingState = .loading
+//        } else {
+//            self.loadingState = .normal
+//        }
+//        sender.loadingState = sender.loadingState == .loading ? .normal : .loading
     }
 }
 

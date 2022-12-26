@@ -106,6 +106,9 @@ extension LoadingButton {
 extension LoadingButton {
     /// 로딩 숨기기
     fileprivate func hideLoading() {
+        // 로그인 버튼 비활성화 한거 다시 활성화
+        self.isUserInteractionEnabled = true
+        
         UIView.transition(with: self,
                           duration: 0.2,
                           options: .curveEaseIn,
@@ -118,6 +121,9 @@ extension LoadingButton {
     }
     /// 로딩 보여주기
     fileprivate func showLoading() {
+        // 로그인 버튼 눌렸을때 비활성화 하는 예시
+        self.isUserInteractionEnabled = false
+        
         if indicator == nil {
             let myIndicator = UIActivityIndicatorView(style: .medium).then {
                 $0.color = .white
