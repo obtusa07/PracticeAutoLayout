@@ -24,7 +24,7 @@ class CustomView: UIView {
         //        let dummyButtons = Array(0...20).map { index in
         //            AlignedIconButton(title: "\(index) 버튼")
         //        }
-        let button = AlignedIconButton(title: "qqjqj", icon: icon)
+        let button = LoadingButton(title: "qqjqj", icon: icon)
         self.addSubview(button)
         button.snp.makeConstraints {
             $0.top.equalToSuperview().offset(100)

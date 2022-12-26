@@ -1,19 +1,39 @@
 //
-//  AlignedIconButton.swift
+//  LoadingButton.swift
 //  PracticeAutoLayout
 //
-//  Created by Taehwan Kim on 2022/12/24.
+//  Created by Taehwan Kim on 2022/12/26.
 //
 
 import UIKit
 
-class AlignedIconButton: UIButton {
+class LoadingButton: UIButton {
     
+    // 로딩 상태
+    enum LoadingState {
+        case normal
+        case loading
+    }
     // 아이콘 방향 설정
     enum IconAlignment {
         case leading
         case trailing
     }
+    
+    /// 로딩 상태
+    var loadingState: LoadingState = .normal {
+        didSet {
+            DispatchQueue.main.sync {
+                switch self.loadingState {
+                case .normal: self.hideLoading()
+                case .loading: self.showLoading()
+                }
+            }
+        }
+    }
+    
+    
+    var indicator:  UIActivityIndicatorView? = nil
     
     var iconAlignment: IconAlignment = .leading
     
@@ -34,7 +54,7 @@ class AlignedIconButton: UIButton {
                      padding: UIEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20),
                      iconAlignment: IconAlignment = .leading,
                      font: UIFont = UIFont.Sunflower(.medium, size: 20)
-    ) { 
+    ) {
         self.init(type: .system)
         self.setTitle(title, for: .normal)
         self.backgroundColor = bgColor
@@ -58,7 +78,7 @@ class AlignedIconButton: UIButton {
 }
 
 // MARK: - 아이콘 정렬 관련
-extension AlignedIconButton {
+extension LoadingButton {
     
     fileprivate func alignIconLeading() {
         contentHorizontalAlignment = .left
@@ -79,5 +99,33 @@ extension AlignedIconButton {
         let imageWidth = imageView?.frame.width ?? 0
         let rightPadding = (availableWidth / 2) - (imageWidth / 2)
         titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: rightPadding)
+    }
+}
+
+// MARK: - 인디케이터 관련
+extension LoadingButton {
+    /// 로딩 숨기기
+    fileprivate func hideLoading() {
+        self.titleLabel?.alpha = 1
+        self.imageView?.alpha = 1
+        self.indicator?.alpha = 0
+    }
+    /// 로딩 보여주기
+    fileprivate func showLoading() {
+        self.titleLabel?.alpha = 0
+        self.imageView?.alpha = 0
+        if indicator == nil {
+            let myIndicator = UIActivityIndicatorView(style: .medium).then {
+                $0.color = .white
+                $0.startAnimating()
+            }
+            self.addSubview(myIndicator)
+            myIndicator.snp.makeConstraints {
+                $0.center.equalToSuperview()
+            }
+            self.indicator = myIndicator
+        } else {
+            self.indicator?.alpha = 1
+        }
     }
 }

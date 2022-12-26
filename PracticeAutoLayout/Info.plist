@@ -21,5 +21,13 @@
 			</array>
 		</dict>
 	</dict>
+	<key>fonts</key>
+	<string></string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Sunflower-Bold.ttf</string>
+		<string>Sunflower-Light.ttf</string>
+		<string>Sunflower-Medium.ttf</string>
+	</array>
 </dict>
 </plist>
