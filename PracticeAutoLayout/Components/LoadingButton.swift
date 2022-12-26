@@ -23,7 +23,7 @@ class LoadingButton: UIButton {
     /// 로딩 상태
     var loadingState: LoadingState = .normal {
         didSet {
-            DispatchQueue.main.sync {
+            DispatchQueue.main.async {
                 switch self.loadingState {
                 case .normal: self.hideLoading()
                 case .loading: self.showLoading()
@@ -32,8 +32,8 @@ class LoadingButton: UIButton {
         }
     }
     
-    
-    var indicator:  UIActivityIndicatorView? = nil
+    // 해당 인디케이터를 처음에는 nil로 선언하고 추후 상태에 따라 정의하여 사용한다.
+    var indicator: UIActivityIndicatorView? = nil
     
     var iconAlignment: IconAlignment = .leading
     
@@ -106,14 +106,18 @@ extension LoadingButton {
 extension LoadingButton {
     /// 로딩 숨기기
     fileprivate func hideLoading() {
-        self.titleLabel?.alpha = 1
-        self.imageView?.alpha = 1
-        self.indicator?.alpha = 0
+        UIView.transition(with: self,
+                          duration: 0.2,
+                          options: .curveEaseIn,
+                          animations: {
+            // 여기 아래에서는 알파를 1로 해서 드러나게 함
+            self.titleLabel?.alpha = 1
+            self.imageView?.alpha = 1
+            self.indicator?.alpha = 0
+        })
     }
     /// 로딩 보여주기
     fileprivate func showLoading() {
-        self.titleLabel?.alpha = 0
-        self.imageView?.alpha = 0
         if indicator == nil {
             let myIndicator = UIActivityIndicatorView(style: .medium).then {
                 $0.color = .white
@@ -124,8 +128,17 @@ extension LoadingButton {
                 $0.center.equalToSuperview()
             }
             self.indicator = myIndicator
-        } else {
-            self.indicator?.alpha = 1
         }
+        self.titleLabel?.alpha = 0
+        self.imageView?.alpha = 0
+        UIView.transition(with: self,
+                          duration: 0.2,
+                          options: .curveEaseOut,
+                          animations: {
+            // 여기 아래에서는 알파를 1로 해서 드러나게 함
+//            self.titleLabel?.alpha = 0
+//            self.imageView?.alpha = 0
+            self.indicator?.alpha = 1
+        })
     }
 }

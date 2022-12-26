@@ -51,16 +51,26 @@ class ViewController: UIViewController {
             $0.edges.equalTo(myScrollView.contentLayoutGuide.snp.edges)
         }
         let icon = UIImage(systemName: "square.and.arrow.up.fill")
-        let dummyButtons = Array(0...20).map { index in
+        let dummyButtons: [LoadingButton] = Array(0...20).map { index in
             LoadingButton(title: "\(index) 버튼", icon: icon, iconAlignment: .leading)
         }
         dummyButtons.forEach {
             butttonStackView.addArrangedSubview($0)
+            $0.addTarget(self, action: #selector(onButtonClicked(_:)), for: .touchUpInside)
         }
     }
 
 }
 
+// MARK: - 액션관련
+extension ViewController {
+    
+    ///  버튼 클릭시 (해당 화면은 옵션 커맨드 쉬프트로 만들수 있다.)
+    /// - Parameter sender: 클릭한 버튼
+    @objc fileprivate func onButtonClicked(_ sender: LoadingButton) {
+        sender.loadingState = sender.loadingState == .loading ? .normal : .loading
+    }
+}
 
 #if DEBUG
 
